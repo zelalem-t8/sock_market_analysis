@@ -20,15 +20,23 @@ def main():
     
 def visualize_results(temporal, publishers, topics, domains):
     """Create visualizations from analysis results"""
+    # Increase the figure size for better visibility
+    plt.figure(figsize=(30, 10))  # Further adjusted size
+    
     # Temporal analysis plot
-    plt.figure(figsize=(12, 5))
     plt.subplot(1, 2, 1)
-    publishers.head(10).plot.barh(x='publisher', y='count')
-    plt.title('Top Publishers by Article Count')
+    publishers.head(10).plot.barh(x='publisher', y='count', color='skyblue')
+    plt.title('Top Publishers by Article Count', fontsize=8)
+    plt.xlabel('Count', fontsize=6)
+    plt.ylabel('Publisher', fontsize=6)
     
     plt.subplot(1, 2, 2)
-    domains.head(5).plot.pie(autopct='%1.1f%%')
-    plt.title('Email Domain Distribution')
+    pie_chart = domains.head(5).plot.pie(
+        autopct='%1.1f%%', startangle=90, 
+        colors=['lightblue', 'lightgreen', 'salmon', 'gold', 'lightcoral']
+    )
+    plt.title('Email Domain Distribution', fontsize=8)
+    plt.legend(fontsize=12, loc='upper left', bbox_to_anchor=(1, 1))  # Moved legend outside the pie chart
     plt.tight_layout()
     plt.show()
     
@@ -36,6 +44,5 @@ def visualize_results(temporal, publishers, topics, domains):
     print("\nTop Topics Identified:")
     for i, (word, count) in enumerate(topics, 1):
         print(f"{i}. {word} (Count: {count})")
-
 if __name__ == "__main__":
     main()
