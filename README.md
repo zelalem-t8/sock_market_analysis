@@ -54,7 +54,7 @@ stocke_market_analysis/
 
 1. **Clone the repository:**
    ```sh
-   git clone <your-repo-url>
+   git clone https://github.com/zelalem-t8/sock_market_analysis
    cd stocke_market_analysis
    ```
 
