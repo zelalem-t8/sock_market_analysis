@@ -5,7 +5,7 @@ class TextCleaner:
     def __init__(self):
         # A minimal English stopwords list
         self.stop_words = set([
-            'the', 'and', 'is', 'in', 'to', 'of', 'a', 'for', 'on', 'with', 'as', 'by', 'at', 'from', 'it', 'an', 'be'
+            'the', 'and', 'is', 'in', 'to', 'of', 'a', 'for', 'on', 'with', 'as', 'by', 'at', 'from', 'it', 'an', 'be','are','vs'
         ])
 
     def clean_text(self, text: str):

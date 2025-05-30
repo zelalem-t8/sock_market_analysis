@@ -3,21 +3,18 @@ from sklearn.feature_extraction.text import CountVectorizer
 from collections import Counter
 import pandas as pd
 class TextAnalyzer:
-    def __init__(self,df):
+    def __init__(self, df):
         if isinstance(df, str):
-            self.df = pd.read_csv(df)  # If df is a file path
+            self.df = pd.read_csv(df)
         else:
             self.df = df
         self.cleaner = TextCleaner()
         self.clean_data()
-        self.df=df
-
-        self.cleaner=TextCleaner
-        self.clean_data()
     def clean_data(self):
         """clean the dataframe """
-        self.df=self.cleaner.clean_data_frame(self.df,'headline')
-        self.df['date']=pd.to_datetime(self.df['date'],utc=True)
+        self.df = self.cleaner.clean_data_frame(self.df, 'headline')
+        # Let pandas infer the format and handle missing/inconsistent values
+        self.df['date'] = pd.to_datetime(self.df['date'], errors='coerce')
     def temporal_analysis(self):
         """Analyze temporal patterns"""
         self.df['hour'] = self.df['date'].dt.hour
@@ -33,7 +30,7 @@ class TextAnalyzer:
     def extract_topics(self, n_topics=5, n_words=5):
         """Extract common topics using simple bag-of-words approach"""
         vectorizer = CountVectorizer(ngram_range=(1, 2), max_features=100)
-        X = vectorizer.fit_transform(self.df['cleaned_text'])
+        X = vectorizer.fit_transform(self.df['headline'])
         words = vectorizer.get_feature_names_out()
         word_counts = X.sum(axis=0).A1
         word_freq = dict(zip(words, word_counts))
