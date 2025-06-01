@@ -4,3 +4,7 @@ seaborn
 nltk
 scikit-learn
 pytest-mock
+pynance
+pyfinance
+textblob
+ta
